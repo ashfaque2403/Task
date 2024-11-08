@@ -78,9 +78,4 @@ Go to `http://127.0.0.1:8000/admin/` and log in with the credentials provided.
 - Create, update, and delete employee records
 - View employee list
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
-
-Be sure to replace the GitHub repository URL with your actual one.
