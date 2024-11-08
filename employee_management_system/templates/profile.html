@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Profile</h2>
+        
+        <!-- Display messages, if any -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" name="name" id="name" class="form-control" value="{{ profile.name }}">
+            </div>
+            
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone:</label>
+                <input type="text" name="phone" id="phone" class="form-control" value="{{ profile.phone }}">
+            </div>
+            
+            <div class="mb-3">
+                <label for="address" class="form-label">Address:</label>
+                <input type="text" name="address" id="address" class="form-control" value="{{ profile.address }}">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+            <a href="{% url 'change_password' %}" class="btn btn-warning">Change Password</a>
+            <a href="{% url 'index' %}" class="btn btn-light">Index</a>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        </form>
+    </div>
+</body>
+</html>

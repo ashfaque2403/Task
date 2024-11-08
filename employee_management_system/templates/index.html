@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+
+    <!-- Navbar inside a container -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container"> <!-- Added container here -->
+            <a class="navbar-brand" href="{% url 'index' %}">Employee Management</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1>Welcome to the Employee Management System</h1>
+        <p>Manage employee profiles, customize fields, and view details here.</p>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <a href="{% url 'create_employees' %}" class="btn btn-primary w-100">Create New Employee</a>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'employee_lists' %}" class="btn btn-secondary w-100">View All Employees</a>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'add_custom_field' employee_id=1 %}" class="btn btn-info w-100">Add Custom Field</a>
+            </div>
+        </div>
+
+        {% if user.is_authenticated %}
+            <div class="mt-4">
+                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+            </div>
+        {% else %}
+            <div class="mt-4">
+                <a href="{% url 'login' %}" class="btn btn-success">Login</a>
+                <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
